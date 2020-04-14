@@ -6,22 +6,12 @@
 \usepackage[dvipsnames,table]{xcolor}
 \usepackage{graphicx,hyperref,geometry,tabularx,xstring,sectsty}
 
-% data definition
-
-% Redefine this path to use your customized data input
-\def\DataPath{data_example}
-%\def\DataPath{data_real}
-
-% Define custon application recipients.
-% The *.tex files have to begin with the set RecpID to be recognized.
-%TODO build process parameter
-\def\RecpPrefix{recp_prefix} % path and file name to Rrecipient data *.tex file
 
 % personal data
 \input{\DataPath/my_data.tex}
 
 % recipient
-\input{\DataPath/\RecpPrefix_data.tex}
+\input{\RecpFile}
 
 
 
@@ -131,7 +121,6 @@
 \setlength{\parindent}{0cm}
 
 
-
 % recipient letter head
 \begin{minipage}[t][4cm][b]{11cm}
 	\RecpCompany\\
@@ -229,13 +218,13 @@ Mit freundlichen Grüßen
 
 \subsection{Sprachkenntnisse}
 \begin{minipage}[t]{0.5\textwidth}
-	\textbf{Programmiersprachen}\\
+	\textbf{Programmiersprachen}\\\medskip
 	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
 		\CVProgLangs
 	\end{tabularx}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
-	\textbf{Sprachen}\\
+	\textbf{Sprachen}\\\medskip
 	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
 		\CVNatLangs
 	\end{tabularx}
