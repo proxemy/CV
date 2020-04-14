@@ -1,0 +1,11 @@
+# only track example data
+data_*/*
+!data_example/*
+
+# pdflatex intermediate output
+*.log
+*.out
+*.toc
+*.aux
+*.pdf
+*.gz

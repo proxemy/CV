@@ -1,0 +1,304 @@
+\documentclass[a4paper,fontsize=12]{scrartcl}
+
+\usepackage[utf8]{inputenc}     % UTF-8 instead of ASCII
+\usepackage[iso,ngerman]{isodate}
+\usepackage{scrlayer-scrpage}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{graphicx,hyperref,geometry,tabularx,xstring,sectsty}
+
+% data definition
+
+% Redefine this path to use your customized data input
+\def\DataPath{data_example}
+%\def\DataPath{data_real}
+
+% Define custon application recipients.
+% The *.tex files have to begin with the set RecpID to be recognized.
+%TODO build process parameter
+\def\RecpPrefix{recp_prefix} % path and file name to Rrecipient data *.tex file
+
+% personal data
+\input{\DataPath/my_data.tex}
+
+% recipient
+\input{\DataPath/\RecpPrefix_data.tex}
+
+
+
+% set link colors
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=black,}
+
+% section headings colors
+\definecolor{MyBlueDark}{rgb}{0,0,0.3}
+\definecolor{MyBlueMedium}{rgb}{0,0,0.4}
+\definecolor{MyBlueLight}{rgb}{0,0,0.5}
+\sectionfont{\color{MyBlueDark}}
+\subsectionfont{\color{MyBlueMedium}}
+\subsubsectionfont{\color{MyBlueLight}}
+
+% helper macros
+\newcommand{\HrefEmail}[1]{\href{mailto:#1}{#1}}
+\newcommand{\HrefUrl}[1]{\href{https://#1}{#1}}
+\newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
+\newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+\newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
+\newcommand{\I}[3]{#1 – #2 & #3 \\} % adds CV rows
+
+
+% text generators
+\newcommand{\MySignature}{%
+	\parbox{\linewidth}{%
+	\bigskip\hspace*{0.6cm}\raisebox{-0.4cm}[1.5cm][0cm]{%
+		\includegraphics[height=2cm]{\DataPath/Signature.png}\\
+	}\\
+	\MyCity{}, \PrettyDate \\
+	\MyNameFirst{} \MyNameLast
+}}
+
+\newif\ifRecpIsMale
+\IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
+\def\RecpSalutation{%
+	\IfNonEmpty{\RecpCompany}{%
+		Sehr geehrte Damen und Herren \RecpCompanySalutForm{} \RecpCompany,
+		\IfNonEmpty{\RecpName}{\newline}
+	}
+		\IfNonEmpty{\RecpName}{%
+		Sehr geehrte\ifRecpIsMale r \fi \RecpTitle{} \RecpName,
+	}
+}%
+
+\newcommand{\MyAddr}{%
+	\MyNameFirst{} \MyNameSur{} \MyNameLast{}\\
+	\MyStreet\\
+	\MyCityCode{} \MyCity\\
+}
+
+\newcommand{\MyContact}{%
+	\IfNonEmpty{\MyTelLandline}{Festnetz & \MyTelLandline \\}
+	\IfNonEmpty{\MyTelMobile}{Mobil & \MyTelMobile \\}
+	\IfNonEmpty{\MyTelFax}{Fax & \MyTelFax \\}
+	\IfNonEmpty{\MySite}{Webiste & \MySite \\}
+	\IfNonEmpty{\MyEmail}{Email & \MyEmail \\}
+}
+
+\newcommand{\MyState}{%
+	\IfNonEmpty{\MyFamilyState}{Familienstand & \MyFamilyState \\}
+	\IfNonEmpty{\MyReligion}{Religion & \MyReligion \\}
+}
+
+\newcommand{\PrintMyExtData}[1]{%
+	\parbox{#1}{\strut
+		\MyAddr
+		\newline
+		{\begin{tabularx}{\linewidth}{@{}rX@{}}
+			\MyState
+			\MyContact
+		\end{tabularx}}
+	\strut}
+}
+
+\newcommand{\PrintMyData}[1]{%
+	\parbox{#1}{\strut
+		\MyAddr
+		\newline
+		{\begin{tabularx}{\linewidth}{@{}rX@{}}
+			\MyContact
+		\end{tabularx}}	
+	\strut}
+}
+
+
+% title page
+\title{\MyTitle}
+\subtitle{Anhang}
+\author{\MyNameFirst{} \MyNameLast \\ \MyStreet \\ \MyCity}
+\date{\PrettyDate}
+
+
+\begin{document}
+
+\pagestyle{plain}
+\pagenumbering{gobble} % disable page enumeration
+\begingroup
+
+\newgeometry{
+	margin=0cm, marginparwidth=0cm, marginparsep=0cm, headheight=0cm,
+	left=2.5cm,
+	top=4.5cm,
+	right=2cm,
+	bottom=2.5cm
+}
+\setlength{\parindent}{0cm}
+
+
+
+% recipient letter head
+\begin{minipage}[t][4cm][b]{11cm}
+	\RecpCompany\\
+	\IfNonEmpty{\RecpName}{ \RecpTitle \ \RecpName \\}
+	\RecpStreet\\
+	\RecpCity\\
+	\RecpEmail
+\end{minipage}%
+% sender
+\begin{minipage}[t][0cm][b]{\linewidth}\begin{flushright}
+	\PrintMyData{\linewidth}
+\end{flushright}\end{minipage}
+
+\setlength{\parskip}{1ex}
+
+% location, date
+\begin{flushright}\bigskip{}\MyCity{}, \PrettyDate{}\end{flushright}
+
+
+% subject
+\bigskip\textbf{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
+
+
+%salutation
+\bigskip\bigskip
+\RecpSalutation
+\medskip
+
+\RecpCoverLetter
+
+\vfill
+Mit freundlichen Grüßen
+
+\MySignature
+\vfill\vfill\vfill
+\restoregeometry
+\endgroup
+
+
+% title page and toc
+\newpage
+\newgeometry{top=1cm}
+\maketitle
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\tableofcontents
+\restoregeometry
+\newpage
+
+% enalbe custom header and footer
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead{\MyTitle}
+\ohead{\MyNameFirst{} \MyNameLast}
+\ifoot{\PrettyDate}
+\ofoot{\pagemark}
+\KOMAoptions{headsepline}
+\addtokomafont{headsepline}{\color{ProcessBlue}}
+
+\setlength{\parskip}{1ex}
+\setlength{\parindent}{0cm}
+
+\pagenumbering{arabic}
+
+\section{Lebenslauf}
+
+\subsection{Persönliche Daten}
+
+\newdimen\PersonalDataHeight
+\setbox0=\vbox{\PrintMyExtData{\textwidth}}
+\PersonalDataHeight=\ht0 \advance\PersonalDataHeight by \dp0
+%\setlength{\PersonalDataHeight}{0.85\PersonalDataHeight}
+
+{
+\renewcommand{\tabularxcolumn}[1]{m{#1}}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+	\PrintMyExtData{0.5\linewidth}
+	&
+	\fbox{\includegraphics[height=\PersonalDataHeight,keepaspectratio]{\DataPath/profile_pic.jpg}}
+\end{tabularx}
+}
+
+\begingroup % disable word hyphenation in tables
+\hyphenpenalty=10000
+\hbadness=10000
+
+\subsection{Praktische Erfahrung}
+\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
+	\CVpractical
+\end{tabularx}
+
+\subsection{Schul- und Berufsausbildung}
+\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
+	\CVeducation
+\end{tabularx}
+
+\subsection{Sprachkenntnisse}
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Programmiersprachen}\\
+	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
+		\CVProgLangs
+	\end{tabularx}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Sprachen}\\
+	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
+		\CVNatLangs
+	\end{tabularx}
+\end{minipage}
+\endgroup % enable table hyphenation
+
+\subsection{Kenntnisse und Stärken}
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Kenntnisse}	
+	\begin{itemize}\itemsep0em
+		\CVKnowledge
+	\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.5\textwidth}
+	\textbf{Stärken}
+	\begin{itemize}\itemsep0em 
+		\CVStrength
+	\end{itemize}
+\end{minipage}
+\subsection{Hobbies und Interessen}
+	\CVHobbiesInterests
+
+\newpage
+
+
+\section{About Me}
+
+\RecpSalutation
+
+\CVAboutMe
+
+\newpage
+
+
+\section{Dokumente}
+
+\newcommand{\RemainingPageHeight}{\dimexpr\pagegoal-\pagetotal-\baselineskip\relax}
+
+% this function includes page filling images of scanned documents
+\newcommand{\PageFillImage}[1]{%
+	\begin{minipage}[b]{\textwidth}
+		\centering\fcolorbox{RoyalBlue}{white}{
+			\includegraphics[width=\linewidth,height=\RemainingPageHeight,keepaspectratio]{\DataPath/#1}
+		}
+	\end{minipage}
+	\newpage
+}%
+
+\CVDocs
+
+\section{Persönliche Erklärung}
+
+Hiermit bestätige ich die Richtigkeit der oben gemachten Angaben.
+
+Ich bin damit einverstanden, dass betriebsintern (\RecpCompany)
+\begin{itemize}\itemsep0em
+\item meine Bewerbungsdaten, soweit sie für die Durchführung und Abwicklung des Bewerbungsverfahrens erforderlich, automatisiert maschinell oder manuell nach den Vorgaben des Bundesdatenschutzgesetzes und der europäischen Datenschutzgrundverordnung erhoben, verarbeitet und genutzt werden;
+\item falls erforderlich, meine Bewerbungsdaten den Niederlassungen und Standorten sowie der zentralen Personalabteilung zugänglich gemacht werden.
+\end{itemize}
+Nach Abschluss des Bewerbungsverfahrens werden ggf. Bewerbungsunterlagen zurückgesendet und gespeicherte Daten unwiederbringlich gelöscht. Daten an Dritte werden nicht weitergegeben, es sei denn, ich habe dem explizit zugestimmt. Diese Einwilligungserklärung gilt bis zu meinem ausdrücklichen Widerruf an \RecpEmail.
+
+\vfill
+\MySignature
+\vfill\vfill\vfill
+
+\end{document}

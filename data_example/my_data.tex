@@ -1,0 +1,96 @@
+% this example list all required data field of personal information
+
+% required information
+\def\MyTitle{Document title}
+
+\def\MyNameFirst{Max}
+\def\MyNameSur{Meso Merito} % optional
+\def\MyNameLast{Mustermann}
+\def\MyBornAt{01.02.3456}
+\def\MyStreet{Krater. 23}
+\def\MyCity{Mond}
+\def\MyCityCode{1376}
+
+% optional information
+\def\MyTelMobile{12345 / 1234567}
+\def\MyTelLandline{12345 / 1234567}
+\def\MyTelFax{12345 / 1234567}
+\def\MyEmail{\HrefEmail{max@mond.sky}}
+\def\MySite{\HrefUrl{www.mond.sky}}
+\def\MyFamilyState{ledig}
+\def\MyReligion{keine}
+
+
+
+% here you can define list items of your CV practical experience and education
+% \I{start date}{end date}{description}
+
+\def\CVpractical{%
+	\I{03.2011}{05.2015}{My Position, the Company, the Workplace}
+	\I{06.2015}{01.2018}{Work2}
+}
+
+\def\CVeducation{
+	\I{from}{until}{School/Training/Education}
+}
+
+\def\CVAboutMe{%
+
+Hier steht ein erklärender Fließtext über mich.
+
+Vielen Dank fürs Lesen und\\
+mit freundlichen Grüßen
+
+\MySignature
+}
+
+% the languages become part of a tabularx env
+\def\CVProgLangs{%
+Expertenkenntnisse &
+	Binary poertry
+\\\BlueHLine
+erweiterte Kenntnisse &
+	Whitespace\newline
+	Brainfuck
+\\\BlueHLine
+Grundkenntnisse &
+	Scratch\newline
+	Geheimsprache\newline
+	Hyperledger in Blockchain-Fabric\newline
+	\LaTeX{}
+}
+
+\def\CVNatLangs{%
+	Esperanto & verhandlungssicher\\
+	English & verhandlungssicher\\
+	Latein & Grundkenntnisse
+}
+
+% knowledge and strength become part of a enumeration (itemize) env
+\def\CVKnowledge{%
+	\item My good knowledge in 1
+	\item Knowledge2
+}
+
+\def\CVStrength{%
+	\item Such talent, very strong
+	\item Strength2
+}
+
+\def\CVHobbiesInterests{%
+%regular text
+Fleißtext über meine Hobbies und Interessen.
+}
+
+% here, you have to specify the sub(sub)section structure of your attached documents
+% the \PageFillImage command ist defined in the main template
+\def\CVDocs{%
+
+\subsection{Certificates}
+
+\subsubsection{School Certificate}
+\PageFillImage{cert_example.png} % page 1
+% page 2 ...
+}
+
+
