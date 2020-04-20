@@ -6,6 +6,14 @@
 \usepackage[dvipsnames,table]{xcolor}
 \usepackage{graphicx,hyperref,geometry,tabularx,xstring,sectsty}
 
+% define default example data pathes
+\ifx \DataPath \undefined
+\newcommand{\DataPath}{data_example}
+\fi
+
+\ifx \RecpFile \undefined
+\newcommand{\RecpFile}{data_example/recp_file.tex}
+\fi
 
 % personal data
 \input{\DataPath/my_data.tex}
@@ -49,7 +57,7 @@
 \IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
 \def\RecpSalutation{%
 	\IfNonEmpty{\RecpCompany}{%
-		Sehr geehrte Damen und Herren \RecpCompanySalutForm{} \RecpCompany,
+		Sehr geehrte Damen und Herren \RecpCompanySalutForm{},
 		\IfNonEmpty{\RecpName}{\newline}
 	}
 		\IfNonEmpty{\RecpName}{%
@@ -246,16 +254,14 @@ Mit freundlichen Grüßen
 \end{minipage}
 \subsection{Hobbies und Interessen}
 	\CVHobbiesInterests
-
 \newpage
 
 
 \section{About Me}
-
 \RecpSalutation
+\bigskip
 
 \CVAboutMe
-
 \newpage
 
 
