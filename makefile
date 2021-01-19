@@ -1,8 +1,12 @@
 
 
-BUILD_DIR ?=./build
-TMP_DIR ?=$(BUILD_DIR)/tmp
-CV_TEMPLATE ?=CV_template.tex
+# Parameters for PDF creation
+# To pass your customized values, eg. use 'make DOC_FONT_SIZE=14 ...'
+BUILD_DIR	?=./build
+BUILD_TMP	?=$(BUILD_DIR)/tmp
+
+TEMPLATE_LETTER	?=src/template_letter.tex
+TEMPLATE_CV		?=src/template_cv.tex
 
 
 define check_env_var
@@ -36,7 +40,7 @@ cover_letter: init_build
 appendix: init_build appendix_toc
 # this is temporary. TODO the two build target generate indiv. PDFs and merge them
 	pdflatex \
-		-output-directory $(BUILD_DIR) \
+		-output-directory $(BUILD_TMP) \
 		-jobname=$(notdir $(basename $(RECP))) \
 		-synctex=1 \
 		-file-line-error \
@@ -45,7 +49,7 @@ appendix: init_build appendix_toc
 		"\\def\\CVFile{$(CV)} \
 		\\def\\CVDataPath{$(dir $(CV))} \
 		\\def\\RecpFile{$(RECP)} \
-		\\input{$(CV_TEMPLATE)}"
+		\\input{$(TEMPLATE_CV)}"
 
 
 appendix_toc:
@@ -55,8 +59,10 @@ appendix_toc:
 .PHONY: clean
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_TMP)
 
 
 .PHONY: init_build
 init_build:
-	mkdir -p $(BUILD_DIR) $(TMP_DIR)
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_TMP)
