@@ -22,5 +22,7 @@ pdf_file_name=`basename ${2}`
 
 latex_code="\\def\\RecpFile{${2}} \\def\\DataPath{${1}} \\input{CV_template.tex}"
 
+mkdir -p build
+
 pdflatex -output-directory "build" -jobname=${pdf_file_name%.*}  -synctex=1 -halt-on-error -interaction=nonstopmode $latex_code
 
