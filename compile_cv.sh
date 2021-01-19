@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 
 
-error() { 
-	echo "$@" >&2; 
+error() {
+	echo "$@" >&2;
 	exit 1;
 }
 
@@ -14,11 +14,11 @@ if [ ! -f "${1}/my_data.tex" ]; then
 	error "Can't find data path: ${1}/my_data.tex"
 fi
 
-if [ ! -f ${2} ]; then
+if [ ! -f "${2}" ]; then
 	error "Can't find recipient data tex file: ${2}"
 fi
 
-pdf_file_name=`basename ${2}`
+pdf_file_name=$(basename ${2})
 
 latex_code="\\def\\RecpFile{${2}} \\def\\DataPath{${1}} \\input{CV_template.tex}"
 
