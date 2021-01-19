@@ -7,16 +7,23 @@
 \usepackage{graphicx,hyperref,geometry,tabularx,xstring,sectsty}
 
 % define default example data pathes
-\ifx \DataPath \undefined
-\newcommand{\DataPath}{data_example}
+\ifx \CVDataPath \undefined
+\message{\newline WARNING: Using default 'CVDataPath'.}
+\newcommand{\CVDataPath}{data_example}
+\fi
+
+\ifx \CVFile \undefined
+\message{\newline WARNING: Using default 'CVFile'.}
+\newcommand{\CVFile}{data_example/my_data.tex}
 \fi
 
 \ifx \RecpFile \undefined
+\message{\newline WARNING: Using default 'RecpFile'.}
 \newcommand{\RecpFile}{data_example/recp_file.tex}
 \fi
 
 % personal data
-\input{\DataPath/my_data.tex}
+\input{\CVFile}
 
 % recipient
 \input{\RecpFile}
@@ -47,7 +54,7 @@
 \newcommand{\MySignature}{%
 	\parbox{\linewidth}{%
 	\bigskip\hspace*{0.6cm}\raisebox{-0.4cm}[1.5cm][0cm]{%
-		\includegraphics[height=2cm]{\DataPath/Signature.png}\\
+		\includegraphics[height=2cm]{\CVDataPath/Signature.png}\\
 	}\\
 	\MyCity{}, \PrettyDate \\
 	\MyNameFirst{} \MyNameLast
@@ -206,7 +213,7 @@ Mit freundlichen Grüßen
 \begin{tabularx}{\textwidth}{@{}lX@{}}
 	\PrintMyExtData{0.5\linewidth}
 	&
-	\fbox{\includegraphics[height=\PersonalDataHeight,keepaspectratio]{\DataPath/profile_pic.jpg}}
+	\fbox{\includegraphics[height=\PersonalDataHeight,keepaspectratio]{\CVDataPath/profile_pic.jpg}}
 \end{tabularx}
 }
 
@@ -273,7 +280,7 @@ Mit freundlichen Grüßen
 \newcommand{\PageFillImage}[1]{%
 	\begin{minipage}[b]{\textwidth}
 		\centering\fcolorbox{RoyalBlue}{white}{
-			\includegraphics[width=\linewidth,height=\RemainingPageHeight,keepaspectratio]{\DataPath/#1}
+			\includegraphics[width=\linewidth,height=\RemainingPageHeight,keepaspectratio]{\CVDataPath/#1}
 		}
 	\end{minipage}
 	\newpage
