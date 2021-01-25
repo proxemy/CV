@@ -20,18 +20,6 @@ all: cover_letter appendix
 	#TODO: merge the two PDFs
 
 
-.PHONY: help
-help:
-	@echo "\tCV - LaTeX template.\n"
-	@echo "To generate an application with customized CV and RECIPIENT data"
-	@echo "'make' needs to get two LaTeX files with the according information."
-	@echo "See the folder 'data_example' for details."
-	@echo "Note, it is expected that the 'CV-file.tex' folder contains alls the"
-	@echo "additional content like 'Signature.png' that get pulled in by it.\n"
-	@echo "USAGE:"
-	@echo "\tmake CV=CV-file.tex RECP=Recipient-file.tex"
-
-
 cover_letter: init_build
 #TODO see below
 	$(call check_env_var,CV)
