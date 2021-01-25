@@ -15,9 +15,9 @@ PDFLATEX_ARGS ?= \
 		-interaction=errorstopmode
 
 PDFLATEX_STDIN := \
-		"\\def\\CVFile{$(CV)} \
-		\\def\\CVDataPath{$(dir $(CV))} \
-		\\def\\RecpFile{$(RECP)}"
+		"\\input{$(CV)} \
+		\\input{$(RECP)} \
+		\\def\\CVDataPath{$(dir $(CV))}"
 
 TEMPLATE_LETTER	?=src/template_letter.tex
 TEMPLATE_CV		?=src/template_cv.tex
