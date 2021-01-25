@@ -4,7 +4,11 @@
 # To pass your customized values, eg. use 'make DOC_FONT_SIZE=14 ...'
 BUILD_DIR	?=./build
 BUILD_TMP	?=$(BUILD_DIR)/tmp
-TARGET_NAME	?=$(notdir $(basename $(RECP)))
+
+TARGET_NAME		?=$(notdir $(basename $(RECP)))
+TARGET_FILE		=$(BUILD_DIR)/$(TARGET_NAME).pdf
+TARGET_CV		=$(BUILD_TMP)/$(TARGET_NAME)_CV.pdf
+TARGET_LETTER	=$(BUILD_TMP)/$(TARGET_NAME)_appendix.pdf
 
 PDFLATEX_ARGS ?= \
 		-synctex=1 \
@@ -27,28 +31,24 @@ $(if $(wildcard ./$(value $(1))),,$(error "'$(1)'-file '$(value $(1))' not found
 endef
 
 
-all: cover_letter appendix
+$(TARGET_FILE): $(BUILD_DIR) $(TARGET_LETTER) $(TARGET_CV)
 	#TODO: merge the two PDFs
 
 
-cover_letter: init_build
+$(TARGET_LETTER): $(BUILD_TMP)
 #TODO see below
 	$(call check_env_var,CV)
 	$(call check_env_var,RECP)
 
 
-appendix: init_build appendix_toc
+$(TARGET_CV): $(BUILD_TMP)
 
 	pdflatex \
-		-output-directory $(BUILD_TMP) \
-		-jobname=$(TARGET_NAME)_appendix \
+		-output-directory=$(BUILD_TMP) \
+		-jobname=$(notdir $(basename $(TARGET_CV))) \
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_STDIN) \
 		"\\input{$(TEMPLATE_CV)}"
-
-
-appendix_toc:
-	#TODO: build the TOC intermediate file before building the actual appendix
 
 
 .PHONY: clean
@@ -57,7 +57,8 @@ clean:
 	rm -rf $(BUILD_TMP)
 
 
-.PHONY: init_build
-init_build:
-	mkdir -p $(BUILD_DIR)
+$(BUILD_TMP):
 	mkdir -p $(BUILD_TMP)
+
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
