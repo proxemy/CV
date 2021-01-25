@@ -4,6 +4,7 @@
 # To pass your customized values, eg. use 'make DOC_FONT_SIZE=14 ...'
 BUILD_DIR	?=./build
 BUILD_TMP	?=$(BUILD_DIR)/tmp
+TARGET_NAME	?=$(notdir $(basename $(RECP)))
 
 TEMPLATE_LETTER	?=src/template_letter.tex
 TEMPLATE_CV		?=src/template_cv.tex
@@ -41,7 +42,7 @@ appendix: init_build appendix_toc
 # this is temporary. TODO the two build target generate indiv. PDFs and merge them
 	pdflatex \
 		-output-directory $(BUILD_TMP) \
-		-jobname=$(notdir $(basename $(RECP))) \
+		-jobname=$(TARGET_NAME)_appendix \
 		-synctex=1 \
 		-file-line-error \
 		-halt-on-error \
