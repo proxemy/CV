@@ -7,7 +7,7 @@ BUILD_TMP	?=$(BUILD_DIR)/tmp
 TARGET_NAME		?=$(notdir $(basename $(RECP)))
 TARGET_FILE		=$(BUILD_DIR)/$(TARGET_NAME).pdf
 TARGET_CV		=$(BUILD_TMP)/$(TARGET_NAME)_CV.pdf
-TARGET_LETTER	=$(BUILD_TMP)/$(TARGET_NAME)_appendix.pdf
+TARGET_LETTER	=$(BUILD_TMP)/$(TARGET_NAME)_letter.pdf
 
 PDFLATEX_ARGS ?= \
 		-synctex=1 \
@@ -33,12 +33,11 @@ $(TARGET_FILE): $(BUILD_DIR) $(TARGET_LETTER) $(TARGET_CV)
 
 	@echo "Merging letter and CV PDF into one: " $(TARGET_NAME) TODO
 
-$(TARGET_LETTER): $(BUILD_TMP)
-	$(call check_env_var,CV)
-	$(call check_env_var,RECP)
+
+$(TARGET_LETTER): check_cli_args $(BUILD_TMP)
 
 
-$(TARGET_CV): $(BUILD_TMP)
+$(TARGET_CV): check_cli_args $(BUILD_TMP)
 
 	$(eval jobname :=$(notdir $(basename $(TARGET_CV))))
 
@@ -60,6 +59,12 @@ $(TARGET_CV): $(BUILD_TMP)
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_STDIN) \
 		"\\input{$(TEMPLATE_CV)}"
+
+
+.PHONY: check_cli_args
+check_cli_args:
+	$(call check_env_var,CV)
+	$(call check_env_var,RECP)
 
 
 .PHONY: clean
