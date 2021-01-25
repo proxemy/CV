@@ -13,8 +13,7 @@ TARGET_LETTER	=$(BUILD_TMP)/$(TARGET_NAME)_appendix.pdf
 PDFLATEX_ARGS ?= \
 		-synctex=1 \
 		-file-line-error \
-		-halt-on-error \
-		-interaction=nonstopmode
+		-interaction=errorstopmode
 
 PDFLATEX_STDIN ?= \
 		"\\def\\CVFile{$(CV)} \
@@ -43,9 +42,23 @@ $(TARGET_LETTER): $(BUILD_TMP)
 
 $(TARGET_CV): $(BUILD_TMP)
 
+	$(eval jobname :=$(notdir $(basename $(TARGET_CV))))
+
+	# pdflatex parses its input once and is thus not able to create a TOPC
+	# index ahead. Therefore we need to execute it twice.
+	@echo "\n--- Building TOC index."
 	pdflatex \
 		-output-directory=$(BUILD_TMP) \
-		-jobname=$(notdir $(basename $(TARGET_CV))) \
+		-jobname=$(jobname) \
+		$(PDFLATEX_ARGS) \
+		-interaction=batchmode \
+		$(PDFLATEX_STDIN) \
+		"\\input{$(TEMPLATE_CV)}"
+
+	@echo "\n--- Creating CV PDF."
+	pdflatex \
+		-output-directory=$(BUILD_TMP) \
+		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_STDIN) \
 		"\\input{$(TEMPLATE_CV)}"
