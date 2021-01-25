@@ -6,6 +6,17 @@ BUILD_DIR	?=./build
 BUILD_TMP	?=$(BUILD_DIR)/tmp
 TARGET_NAME	?=$(notdir $(basename $(RECP)))
 
+PDFLATEX_ARGS ?= \
+		-synctex=1 \
+		-file-line-error \
+		-halt-on-error \
+		-interaction=nonstopmode
+
+PDFLATEX_STDIN ?= \
+		"\\def\\CVFile{$(CV)} \
+		\\def\\CVDataPath{$(dir $(CV))} \
+		\\def\\RecpFile{$(RECP)}"
+
 TEMPLATE_LETTER	?=src/template_letter.tex
 TEMPLATE_CV		?=src/template_cv.tex
 
@@ -27,18 +38,13 @@ cover_letter: init_build
 
 
 appendix: init_build appendix_toc
-# this is temporary. TODO the two build target generate indiv. PDFs and merge them
+
 	pdflatex \
 		-output-directory $(BUILD_TMP) \
 		-jobname=$(TARGET_NAME)_appendix \
-		-synctex=1 \
-		-file-line-error \
-		-halt-on-error \
-		-interaction=nonstopmode \
-		"\\def\\CVFile{$(CV)} \
-		\\def\\CVDataPath{$(dir $(CV))} \
-		\\def\\RecpFile{$(RECP)} \
-		\\input{$(TEMPLATE_CV)}"
+		$(PDFLATEX_ARGS) \
+		$(PDFLATEX_STDIN) \
+		"\\input{$(TEMPLATE_CV)}"
 
 
 appendix_toc:
