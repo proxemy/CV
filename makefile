@@ -1,7 +1,6 @@
 
 
-# Parameters for PDF creation
-# To pass your customized values, eg. use 'make DOC_FONT_SIZE=14 ...'
+# Global parameters for PDF creation
 BUILD_DIR	?=./build
 BUILD_TMP	?=$(BUILD_DIR)/tmp
 
@@ -15,7 +14,7 @@ PDFLATEX_ARGS ?= \
 		-file-line-error \
 		-interaction=errorstopmode
 
-PDFLATEX_STDIN ?= \
+PDFLATEX_STDIN := \
 		"\\def\\CVFile{$(CV)} \
 		\\def\\CVDataPath{$(dir $(CV))} \
 		\\def\\RecpFile{$(RECP)}"
@@ -31,11 +30,10 @@ endef
 
 
 $(TARGET_FILE): $(BUILD_DIR) $(TARGET_LETTER) $(TARGET_CV)
-	#TODO: merge the two PDFs
 
+	@echo "Merging letter and CV PDF into one: " $(TARGET_NAME) TODO
 
 $(TARGET_LETTER): $(BUILD_TMP)
-#TODO see below
 	$(call check_env_var,CV)
 	$(call check_env_var,RECP)
 
