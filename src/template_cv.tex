@@ -98,62 +98,8 @@
 
 \begin{document}
 
-\pagestyle{plain}
-\pagenumbering{gobble} % disable page enumeration
-\begingroup
-
-\newgeometry{
-	margin=0cm, marginparwidth=0cm, marginparsep=0cm, headheight=0cm,
-	left=2.5cm,
-	top=4.5cm,
-	right=2cm,
-	bottom=2.5cm
-}
-\setlength{\parindent}{0cm}
-
-
-% recipient letter head
-\begin{minipage}[t][4cm][b]{11cm}
-	\RecpCompany\\
-	\IfNonEmpty{\RecpName}{ \RecpTitle \ \RecpName \\}
-	\RecpStreet\\
-	\RecpCity\\
-	\RecpEmail
-\end{minipage}%
-% sender
-\begin{minipage}[t][0cm][b]{\linewidth}\begin{flushright}
-	\PrintMyData{\linewidth}
-\end{flushright}\end{minipage}
-
-\setlength{\parskip}{1ex}
-
-% location, date
-\begin{flushright}\bigskip{}\MyCity{}, \PrettyDate{}\end{flushright}
-
-
-% subject
-\bigskip\textbf{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
-
-
-%salutation
-\bigskip\bigskip
-\RecpSalutation
-\medskip
-
-\RecpCoverLetter
-
-\vfill
-Mit freundlichen Grüßen
-
-\MySignature
-\vfill\vfill\vfill
-\restoregeometry
-\endgroup
-
-
-% title page and toc
-\newpage
 \newgeometry{top=1cm}
+\pagenumbering{gobble} % disable page enumeration
 \maketitle
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
 \tableofcontents

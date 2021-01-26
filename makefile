@@ -36,6 +36,14 @@ $(TARGET_FILE): $(BUILD_DIR) $(TARGET_LETTER) $(TARGET_CV)
 
 $(TARGET_LETTER): check_cli_args $(BUILD_TMP)
 
+	@echo "\n--- Creating letter PDF."
+	pdflatex \
+		-output-directory=$(BUILD_TMP) \
+		-jobname=$(notdir $(basename $(TARGET_LETTER))) \
+		$(PDFLATEX_ARGS) \
+		$(PDFLATEX_STDIN) \
+		"\\input{$(TEMPLATE_LETTER)}"
+
 
 $(TARGET_CV): check_cli_args $(BUILD_TMP)
 
