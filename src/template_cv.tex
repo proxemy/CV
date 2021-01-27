@@ -1,93 +1,11 @@
 \documentclass[a4paper,fontsize=12]{scrartcl}
 
-\usepackage[utf8]{inputenc}     % UTF-8 instead of ASCII
-\usepackage[iso,ngerman]{isodate}
-\usepackage{scrlayer-scrpage}
-\usepackage[dvipsnames,table]{xcolor}
-\usepackage{graphicx,hyperref,geometry,tabularx,xstring,sectsty}
+\usepackage{scrlayer-scrpage,geometry,sectsty}
+\usepackage[colorlinks=true, urlcolor=blue, linkcolor=black]{hyperref}
 
-% set link colors
-\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=black,}
-
-% section headings colors
-\definecolor{MyBlueDark}{rgb}{0,0,0.3}
-\definecolor{MyBlueMedium}{rgb}{0,0,0.4}
-\definecolor{MyBlueLight}{rgb}{0,0,0.5}
 \sectionfont{\color{MyBlueDark}}
 \subsectionfont{\color{MyBlueMedium}}
 \subsubsectionfont{\color{MyBlueLight}}
-
-% helper macros
-\newcommand{\HrefEmail}[1]{\href{mailto:#1}{#1}}
-\newcommand{\HrefUrl}[1]{\href{https://#1}{#1}}
-\newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
-\newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
-\newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
-\newcommand{\I}[3]{#1 – #2 & #3 \\} % adds CV rows
-
-
-% text generators
-\newcommand{\MySignature}{%
-	\parbox{\linewidth}{%
-	\bigskip\hspace*{0.6cm}\raisebox{-0.4cm}[1.5cm][0cm]{%
-		\includegraphics[height=2cm]{\CVDataPath/Signature.png}\\
-	}\\
-	\MyCity{}, \PrettyDate \\
-	\MyNameFirst{} \MyNameLast
-}}
-
-\newif\ifRecpIsMale
-\IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
-\def\RecpSalutation{%
-	\IfNonEmpty{\RecpCompany}{%
-		Sehr geehrte Damen und Herren \RecpCompanySalutForm{},
-		\IfNonEmpty{\RecpName}{\newline}
-	}
-		\IfNonEmpty{\RecpName}{%
-		Sehr geehrte\ifRecpIsMale r \fi \RecpTitle{} \RecpName,
-	}
-}%
-
-\newcommand{\MyAddr}{%
-	\MyNameFirst{} \MyNameSur{} \MyNameLast{}\\
-	\MyStreet\\
-	\MyCityCode{} \MyCity\\
-}
-
-\newcommand{\MyContact}{%
-	\IfNonEmpty{\MyTelLandline}{Festnetz & \MyTelLandline \\}
-	\IfNonEmpty{\MyTelMobile}{Mobil & \MyTelMobile \\}
-	\IfNonEmpty{\MyTelFax}{Fax & \MyTelFax \\}
-	\IfNonEmpty{\MySite}{Webiste & \MySite \\}
-	\IfNonEmpty{\MyEmail}{Email & \MyEmail \\}
-}
-
-\newcommand{\MyState}{%
-	\IfNonEmpty{\MyFamilyState}{Familienstand & \MyFamilyState \\}
-	\IfNonEmpty{\MyReligion}{Religion & \MyReligion \\}
-}
-
-\newcommand{\PrintMyExtData}[1]{%
-	\parbox{#1}{\strut
-		\MyAddr
-		\newline
-		{\begin{tabularx}{\linewidth}{@{}rX@{}}
-			\MyState
-			\MyContact
-		\end{tabularx}}
-	\strut}
-}
-
-\newcommand{\PrintMyData}[1]{%
-	\parbox{#1}{\strut
-		\MyAddr
-		\newline
-		{\begin{tabularx}{\linewidth}{@{}rX@{}}
-			\MyContact
-		\end{tabularx}}	
-	\strut}
-}
-
 
 % title page
 \title{\MyTitle}

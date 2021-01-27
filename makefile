@@ -14,13 +14,15 @@ PDFLATEX_ARGS ?= \
 		-file-line-error \
 		-interaction=errorstopmode
 
+TEMPLATE_LETTER	?=src/template_letter.tex
+TEMPLATE_CV		?=src/template_cv.tex
+TEMPLATE_CORE	?=src/template_core.tex
+
 PDFLATEX_STDIN := \
 		"\\input{$(CV)} \
 		\\input{$(RECP)} \
+		\\input{$(TEMPLATE_CORE)} \
 		\\def\\CVDataPath{$(dir $(CV))}"
-
-TEMPLATE_LETTER	?=src/template_letter.tex
-TEMPLATE_CV		?=src/template_cv.tex
 
 
 define check_env_var
@@ -56,7 +58,6 @@ $(TARGET_CV): check_cli_args $(BUILD_TMP)
 		-output-directory=$(BUILD_TMP) \
 		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
-		-interaction=batchmode \
 		$(PDFLATEX_STDIN) \
 		"\\input{$(TEMPLATE_CV)}"
 
