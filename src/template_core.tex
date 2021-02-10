@@ -33,7 +33,7 @@
 \IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
 \def\RecpSalutation{%
 	\IfNonEmpty{\RecpCompany}{%
-		Sehr geehrte Damen und Herren \RecpCompanySalutForm{},
+		Sehr geehrte Damen und Herren \RecpCompanySalutForm{} \RecpCompany,
 		\IfNonEmpty{\RecpName}{\newline}
 	}
 		\IfNonEmpty{\RecpName}{%
