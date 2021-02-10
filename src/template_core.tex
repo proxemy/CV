@@ -17,6 +17,7 @@
 \newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 \newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
 \newcommand{\I}[3]{#1 – #2 & #3 \\} % adds CV rows of work places into a table
+\def\MyNameFull{\MyNameFirst{} \IfNonEmpty{\MyNameSur}{\MyNameSur }{} \MyNameLast}
 
 % text generators
 \newcommand{\MySignature}{%
