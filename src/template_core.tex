@@ -1,6 +1,6 @@
 
 
-\RequirePackage[utf8]{inputenc}     % UTF-8 instead of ASCII
+\RequirePackage[utf8]{inputenc} % UTF-8 instead of ASCII
 \RequirePackage[iso,ngerman]{isodate}
 \RequirePackage[dvipsnames,table]{xcolor}
 \RequirePackage{xstring,graphicx,tabularx}
@@ -16,7 +16,7 @@
 \newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
 \newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 \newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
-\newcommand{\I}[3]{#1 – #2 & #3 \\} % adds CV rows
+\newcommand{\I}[3]{#1 – #2 & #3 \\} % adds CV rows of work places into a table
 
 % text generators
 \newcommand{\MySignature}{%
@@ -50,7 +50,7 @@
 	\IfNonEmpty{\MyTelLandline}{Festnetz & \MyTelLandline \\}
 	\IfNonEmpty{\MyTelMobile}{Mobil & \MyTelMobile \\}
 	\IfNonEmpty{\MyTelFax}{Fax & \MyTelFax \\}
-	\IfNonEmpty{\MySite}{Webiste & \MySite \\}
+	\IfNonEmpty{\MySite}{Website & \MySite \\}
 	\IfNonEmpty{\MyEmail}{Email & \MyEmail \\}
 }
 
