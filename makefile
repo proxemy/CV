@@ -18,7 +18,7 @@ TEMPLATE_LETTER	?=src/template_letter.tex
 TEMPLATE_CV		?=src/template_cv.tex
 TEMPLATE_CORE	?=src/template_core.tex
 
-PDFLATEX_STDIN := \
+PDFLATEX_TEX_ARGS := \
 		"\\input{$(CV)} \
 		\\input{$(RECP)} \
 		\\input{$(TEMPLATE_CORE)} \
@@ -43,7 +43,7 @@ $(TARGET_LETTER): check_cli_args $(BUILD_TMP)
 		-output-directory=$(BUILD_TMP) \
 		-jobname=$(notdir $(basename $(TARGET_LETTER))) \
 		$(PDFLATEX_ARGS) \
-		$(PDFLATEX_STDIN) \
+		$(PDFLATEX_TEX_ARGS) \
 		"\\input{$(TEMPLATE_LETTER)}"
 
 
@@ -51,14 +51,15 @@ $(TARGET_CV): check_cli_args $(BUILD_TMP)
 
 	$(eval jobname :=$(notdir $(basename $(TARGET_CV))))
 
-	# pdflatex parses its input once and is thus not able to create a TOPC
-	# index ahead. Therefore we need to execute it twice.
+	# pdflatex parses its input once and is thus not able to create a TOC
+	# index ahead. Therefore we need to execute it twice to create a complete
+	# TOC file for the the second run.
 	@echo "\n--- Building TOC index."
 	pdflatex \
 		-output-directory=$(BUILD_TMP) \
 		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
-		$(PDFLATEX_STDIN) \
+		$(PDFLATEX_TEX_ARGS) \
 		"\\input{$(TEMPLATE_CV)}"
 
 	@echo "\n--- Creating CV PDF."
@@ -66,7 +67,7 @@ $(TARGET_CV): check_cli_args $(BUILD_TMP)
 		-output-directory=$(BUILD_TMP) \
 		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
-		$(PDFLATEX_STDIN) \
+		$(PDFLATEX_TEX_ARGS) \
 		"\\input{$(TEMPLATE_CV)}"
 
 
