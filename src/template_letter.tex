@@ -1,51 +1,56 @@
-\documentclass[fontsize=12,DIV=15,BCOR=0pt]{scrlttr2}
+\documentclass[%
+	fontsize=12,
+	DIV=15,
+	BCOR=0pt,
+	fromalign=right,
+	version=last,
+	parskip=half
+]{scrlttr2}
 % BCOR: sets binding correction margin for bound paper
 % DIV: the number of page divisions (1 head, 2 foot, rest body).
 
-\usepackage[colorlinks=true, urlcolor=blue, linkcolor=black]{hyperref}
+\usepackage[colorlinks=true,urlcolor=blue,linkcolor=black]{hyperref}
+
+\LoadLetterOption{DIN}
+\setkomavar{fromname}{\MyNameFull}
+\setkomavar{fromaddress}{%
+	\MyStreet{}\\
+	\MyCityCode{} \MyCity\\
+	\medskip
+	% adds a table with remote contact info below the general senders address
+	\begin{tabular}{@{}r|r@{}}
+		\MyContact
+	\end{tabular}
+}
+
+% set senders address. a small line ontop of recipient address in the letter window
+\setkomavar{backaddressseparator}{\enspace\textperiodcentered\enspace}
+\setkomavar{backaddress}{\MyNameFirst{} \MyNameLast{}\\ \MyStreet{}\\ \MyCityCode{} \MyCity}
+
+% general letter text fields
+\setkomavar{subject}{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
+\setkomavar{signature}{\MySignature}
+\setkomavar{place}{\MyCity}
+\setkomavar{date}{\PrettyDate}
 
 \begin{document}
 
-%\pagestyle{plain}
-%\pagenumbering{gobble} % disable page enumeration
+\renewcommand*{\raggedsignature}{\raggedright} % shifts the signature block and greeting to the left
 
-% recipient letter head
-\begin{minipage}[t][4cm][b]{11cm}
+\begin{letter}{%
 	\RecpCompany\\
 	\IfNonEmpty{\RecpName}{ \RecpTitle \ \RecpName \\}
 	\RecpStreet\\
 	\RecpCity\\
 	\RecpEmail
-\end{minipage}%
-% sender
-\begin{minipage}[t][0cm][b]{\linewidth}\begin{flushright}
-	\MyData{\linewidth}
-\end{flushright}\end{minipage}
+}
+	\opening{\RecpSalutation}
+	\medskip
 
-\setlength{\parskip}{1ex}
+	\RecpCoverLetter
+	\bigskip
 
-% location, date
-\begin{flushright}\bigskip{}\MyCity{}, \PrettyDate{}\end{flushright}
-
-
-% subject
-\bigskip\textbf{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
-
-
-%salutation
-\bigskip\bigskip
-\RecpSalutation
-\medskip
-
-\RecpCoverLetter
-
-\vfill
-Mit freundlichen Grüßen
-
-\MySignature
-\vfill\vfill\vfill
-
-% title page and toc
-\newpage
+	\closing{Mit freundlichen Grüßen}
+\end{letter}
 
 \end{document}
