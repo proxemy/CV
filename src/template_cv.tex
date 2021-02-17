@@ -25,7 +25,7 @@
 \begin{document}
 
 % create the TOC page
-\newgeometry{top=1cm}
+\newgeometry{top=1cm,bottom=1cm}
 \pagenumbering{gobble} % disable page enumeration
 \maketitle
 \renewcommand{\contentsname}{Inhaltsverzeichnis}
@@ -40,7 +40,7 @@
 \ohead{\MyNameFirst{} \MyNameLast}
 \ifoot{\PrettyDate}
 \ofoot{\pagemark}
-\KOMAoptions{headsepline}
+\KOMAoptions{headsepline=1pt}
 \addtokomafont{headsepline}{\color{ProcessBlue}}
 
 \setlength{\parskip}{1ex}
