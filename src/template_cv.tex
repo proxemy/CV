@@ -60,14 +60,15 @@
 \newdimen\PersonalDataHeight
 \setbox0=\vbox{\MyDataExt{\textwidth}}
 \PersonalDataHeight=\ht0 \advance\PersonalDataHeight by \dp0
-%\setlength{\PersonalDataHeight}{0.85\PersonalDataHeight}
 
 {
 \renewcommand{\tabularxcolumn}[1]{m{#1}}
 \begin{tabularx}{\textwidth}{@{}lX@{}}
 	\MyDataExt{0.5\linewidth}
 	&
-	\fbox{\includegraphics[height=\PersonalDataHeight,keepaspectratio]{\CVDataPath/profile_pic.jpg}}
+	\noindent\center
+	\includegraphics[height=\PersonalDataHeight,keepaspectratio]
+	{\CVDataPath/profile_pic.jpg}
 \end{tabularx}
 }
 
@@ -133,7 +134,7 @@
 % this function includes page filling images of scanned documents
 \newcommand{\PageFillImage}[1]{%
 	\begin{minipage}[b]{\textwidth}
-		\centering\fcolorbox{RoyalBlue}{white}{
+		\center\fcolorbox{RoyalBlue}{white}{
 			\includegraphics[width=\linewidth,height=\RemainingPageHeight,keepaspectratio]{\CVDataPath/#1}
 		}
 	\end{minipage}
