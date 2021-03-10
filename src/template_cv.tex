@@ -3,7 +3,7 @@
 	fontsize=12
 ]{scrartcl}
 
-\usepackage{scrlayer-scrpage,geometry,sectsty}
+\usepackage{scrlayer-scrpage,geometry,sectsty,pdfpages}
 \usepackage[
 	colorlinks=true,
 	urlcolor=blue,
@@ -27,6 +27,9 @@
 
 
 \begin{document}
+
+% include the recipient letter as first page
+\includepdf[pages=-,link=true]{\InputLetter}
 
 % create the TOC page
 \newgeometry{top=1cm,bottom=1cm}
