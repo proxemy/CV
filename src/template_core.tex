@@ -54,8 +54,8 @@
 	\IfNonEmpty{\MyTelLandline}{Festnetz & \MyTelLandline \\}
 	\IfNonEmpty{\MyTelMobile}{Mobil & \MyTelMobile \\}
 	\IfNonEmpty{\MyTelFax}{Fax & \MyTelFax \\}
-	\IfNonEmpty{\MySite}{Website & \MySite \\}
-	\IfNonEmpty{\MyEmail}{Email & \MyEmail \\}
+	\IfNonEmpty{\MySite}{Website & \HrefUrl{\MySite} \\}
+	\IfNonEmpty{\MyEmail}{Email & \HrefEmail{\MyEmail} \\}
 }
 
 \newcommand{\MyState}{%
