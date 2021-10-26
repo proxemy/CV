@@ -1,6 +1,5 @@
-
 \pdfgentounicode=1
-\pdfcompresslevel=0
+%\pdfcompresslevel=0  % produces too large PDFs
 
 \RequirePackage[utf8]{inputenc} % UTF-8 instead of ASCII
 \RequirePackage[iso,ngerman]{isodate}
@@ -14,7 +13,6 @@
 
 % helper macros
 \newcommand{\HrefEmail}[1]{\href{mailto:#1}{#1}}
-\newcommand{\HrefUrl}[1]{\href{https://#1}{#1}}
 \newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
 \newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
 \newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
@@ -54,7 +52,6 @@
 	\IfNonEmpty{\MyTelLandline}{Festnetz & \MyTelLandline \\}
 	\IfNonEmpty{\MyTelMobile}{Mobil & \MyTelMobile \\}
 	\IfNonEmpty{\MyTelFax}{Fax & \MyTelFax \\}
-	\IfNonEmpty{\MySite}{Website & \HrefUrl{\MySite} \\}
 	\IfNonEmpty{\MyEmail}{Email & \HrefEmail{\MyEmail} \\}
 }
 
@@ -70,6 +67,7 @@
 		{\begin{tabularx}{\linewidth}{@{}rX@{}}
 			\MyState
 			\MyContact
+			\IfNonEmpty{\MySite}{Website & \MySite \\}
 		\end{tabularx}}
 	\strut}
 }
