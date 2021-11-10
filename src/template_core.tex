@@ -30,6 +30,19 @@
 	\MyNameFirst{} \MyNameLast
 }}
 
+\newcommand\watermark[0]{%
+	\sbox0{}
+	\resizebox*{.1\ht0}{.1\ht0}{
+		\color{white!0}{%
+			|\PrettyDate{},
+			\RecpTitle{},
+			\RecpName{},
+			\RecpCompany{},
+			\RecpStreet{},
+			\RecpCity{},
+			Referenz:\RecpJobRef{}|
+}}}
+
 \newif\ifRecpIsMale
 \IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
 \def\RecpSalutation{%
