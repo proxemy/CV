@@ -39,7 +39,10 @@
 \setkomavar{backaddress}{\MyNameFirst{} \MyNameLast{}\\ \MyStreet{}\\ \MyCityCode{} \MyCity}
 
 % general letter text fields
-\setkomavar{subject}{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
+\setkomavar{subject}{%
+	\MyTitle{} – \RecpJobTitle
+	\IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}
+}
 \setkomavar{signature}{\MySignature}
 \setkomavar{place}{\MyCity}
 \setkomavar{date}{\PrettyDate}
