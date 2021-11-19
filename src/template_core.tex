@@ -15,7 +15,8 @@
 \newcommand{\HrefEmail}[1]{\href{mailto:#1}{#1}}
 \newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
 \newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
-\newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline}
+\newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline} % for tabularx sections
+\newcommand{\BlueVLine}{\color{RoyalBlue}{\vline}{}\color{Black}} % general vertical line
 \newcommand{\I}[3]{#1 – #2 & #3\smallskip \\} % adds CV rows of work places into a table
 \def\MyNameShort{\MyNameFirst{} \MyNameLast}
 \def\MyNameFull{\MyNameFirst{} \IfNonEmpty{\MyNameSur}{\MyNameSur }{} \MyNameLast}
