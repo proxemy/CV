@@ -22,7 +22,7 @@ PDFLATEX_TEX_ARGS := \
 		\\input{$(TEMPLATE_CORE)} \
 		\\def\\CVDataPath{$(dir $(CV))}"
 
-
+# helper function to check existence of env vars
 define check_env_var
 $(if $(value $(1)),,$(error "'$(1)' not passed. Use 'make $(1)=file.tex'."))
 $(if $(wildcard ./$(value $(1))),,$(error "'$(1)'-file '$(value $(1))' not found."))
