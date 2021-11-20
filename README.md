@@ -1,4 +1,3 @@
-
 # CV LaTeX template
 
 This LaTeX template creates a full job application plus attached CV when provided
@@ -11,10 +10,11 @@ To customize the PDF to your needs, you have to provide two files:
 * `my_data.tex` -- contains your data and CV information
 * `recipient_file.tex` -- contains contact informarmation of the recipient
 
-You can use these `data_example/*.tex` files for a test run, to produce a dummy
+You can use the `data_example/*.tex` files for a test run, to produce a dummy
 PDF and as guidance to adapt the input .tex files to your real data.
 
-To pass these file to `pdflatex` you have to define them as environment variables.
+To pass these files to `pdflatex` you have to define them as environment variables
+`CV` and `RECP`.
 
 `export CV=data_example/my_data.tex RECP=data_example/recp_file.tex`
 
@@ -27,13 +27,14 @@ to replicate the required dependencies (see `shell.nix`).
 
 ## Customization
 
-You can provice any number of images of scanned documents to attach in the `data folder`
-like `data_example/*.{png,jpg}`. Please mind a propper format and ratio.  
+You can provide any number of images of scanned documents to attach in the data folder
+like `data_example/*.{png,jpg}`. Please mind a propper format and aspect ratio.  
 Once all required and wanted images are present you can refer to them in your
-`my_data.tex` file in a relative fashion.
+`my_data.tex` file, in the `\def\CVDocs` section, in a relative fashion.
 
 ```tex
-\subsubsection{School Certificate}
-\PageFillImage{cert_example.png} % page 1
-% page 2 ...
+\subsubsection{Additional Certificate Title}
+\PageFillImage{some_cert_page_1.png}
+\PageFillImage{some_cert_page_2.png}
+% and so on
 ```
