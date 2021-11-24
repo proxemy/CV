@@ -20,7 +20,10 @@
 \renewcommand{\familydefault}{\sfdefault} % set default font sans serif
 
 % title page
-\title{\MyTitle{} – \RecpJobTitle}
+\title{%
+	\MyTitle{} – \RecpJobTitle
+	\IfNonEmpty{\RecpJobRef}{\\{\small \RecpJobRef}}
+}
 \subtitle{Anhang}
 \author{\MyNameShort \\ \MyStreet \\ \MyCity}
 \date{\PrettyDate}
@@ -43,7 +46,7 @@
 % enalbe custom header and footer
 \pagestyle{scrheadings}
 \clearscrheadfoot
-\ihead{\MyTitle{} – \RecpJobTitle}
+\ihead{\MyTitle{} – \RecpJobTitle\IfNonEmpty{\RecpJobRef}{, \RecpJobRef{}}}
 \ohead{\watermark{} \MyNameFirst{} \MyNameLast}
 \ifoot{\PrettyDate}
 \ofoot{\pagemark}
