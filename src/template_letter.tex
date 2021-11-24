@@ -4,7 +4,9 @@
 	BCOR=0pt,
 	fromalign=right,
 	version=last,
-	parskip=half
+	parskip=half,
+	firstfoot=false,
+	enlargefirstpage
 ]{scrlttr2}
 % BCOR: sets binding correction margin for bound paper
 % DIV: the number of page divisions (1 head, 2 foot, rest body).
@@ -27,7 +29,7 @@
 \setkomavar{fromaddress}{%
 	\MyStreet{}\\
 	\MyCityCode{} \MyCity\\
-	\medskip
+	\smallskip
 	% adds a table with remote contact info below the general senders address
 	\begin{tabular}{@{}r|r@{}}
 		\MyContact
@@ -58,10 +60,8 @@
 	\RecpCity\\
 }
 	\opening{\RecpSalutation}
-	\medskip
 
 	\RecpCoverLetter
-	\bigskip
 
 	\closing{Mit freundlichen Grüßen}
 \end{letter}
