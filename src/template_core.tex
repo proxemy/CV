@@ -70,6 +70,7 @@
 }
 
 \newcommand{\MyState}{%
+	\IfNonEmpty{\MyBornAt}{Geboren am & \MyBornAt \IfNonEmpty{\MyBornIn}{ in \MyBornIn} \\}
 	\IfNonEmpty{\MyFamilyState}{Familienstand & \MyFamilyState \\}
 	\IfNonEmpty{\MyReligion}{Religion & \MyReligion \\}
 }
