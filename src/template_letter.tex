@@ -4,7 +4,9 @@
 	BCOR=0pt,
 	fromalign=right,
 	version=last,
-	parskip=half
+	parskip=half,
+	firstfoot=false,
+	enlargefirstpage
 ]{scrlttr2}
 % BCOR: sets binding correction margin for bound paper
 % DIV: the number of page divisions (1 head, 2 foot, rest body).
@@ -19,7 +21,6 @@
 % Disables clickable links in the contact field because the 'pdfpages' import
 % of the letter breaks links anyway. There is no propper fix for this afaik.
 % 2021-03-10
-\renewcommand{\HrefUrl}[1]{#1}
 \renewcommand{\HrefEmail}[1]{#1}
 
 
@@ -28,7 +29,7 @@
 \setkomavar{fromaddress}{%
 	\MyStreet{}\\
 	\MyCityCode{} \MyCity\\
-	\medskip
+	\smallskip
 	% adds a table with remote contact info below the general senders address
 	\begin{tabular}{@{}r|r@{}}
 		\MyContact
@@ -40,7 +41,10 @@
 \setkomavar{backaddress}{\MyNameFirst{} \MyNameLast{}\\ \MyStreet{}\\ \MyCityCode{} \MyCity}
 
 % general letter text fields
-\setkomavar{subject}{\MyTitle{} \IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}}
+\setkomavar{subject}{%
+	\MyTitle{} – \RecpJobTitle
+	\IfNonEmpty{\RecpJobRef}{\\ Referenz: \RecpJobRef}
+}
 \setkomavar{signature}{\MySignature}
 \setkomavar{place}{\MyCity}
 \setkomavar{date}{\PrettyDate}
@@ -54,13 +58,10 @@
 	\IfNonEmpty{\RecpName}{ \RecpTitle \ \RecpName \\}
 	\RecpStreet\\
 	\RecpCity\\
-	\RecpEmail
 }
 	\opening{\RecpSalutation}
-	\medskip
 
 	\RecpCoverLetter
-	\bigskip
 
 	\closing{Mit freundlichen Grüßen}
 \end{letter}

@@ -22,15 +22,14 @@ PDFLATEX_TEX_ARGS := \
 		\\input{$(TEMPLATE_CORE)} \
 		\\def\\CVDataPath{$(dir $(CV))}"
 
-
+# helper function to check existence of env vars
 define check_env_var
 $(if $(value $(1)),,$(error "'$(1)' not passed. Use 'make $(1)=file.tex'."))
 $(if $(wildcard ./$(value $(1))),,$(error "'$(1)'-file '$(value $(1))' not found."))
 endef
 
 
-$(TARGET_FILE): check_cli_args $(BUILD_DIR) $(TARGET_LETTER)
-
+$(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 	$(eval jobname :=$(notdir $(basename $(TARGET_FILE))))
 
 	# pdflatex parses its input once and is thus not able to create a TOC
@@ -55,8 +54,7 @@ $(TARGET_FILE): check_cli_args $(BUILD_DIR) $(TARGET_LETTER)
 		\\input{$(TEMPLATE_CV)}"
 
 
-$(TARGET_LETTER): check_cli_args $(BUILD_TMP)
-
+$(TARGET_LETTER): check_env_args $(BUILD_TMP)
 	@echo "\n--- Creating letter PDF."
 	pdflatex \
 		-output-directory=$(BUILD_DIR) \
@@ -66,8 +64,8 @@ $(TARGET_LETTER): check_cli_args $(BUILD_TMP)
 		"\\input{$(TEMPLATE_LETTER)}"
 
 
-.PHONY: check_cli_args
-check_cli_args:
+.PHONY: check_env_args
+check_env_args:
 	$(call check_env_var,CV)
 	$(call check_env_var,RECP)
 

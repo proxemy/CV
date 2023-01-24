@@ -1,4 +1,4 @@
-\documentclass[
+﻿\documentclass[
 	a4paper,
 	fontsize=12
 ]{scrartcl}
@@ -24,7 +24,10 @@
 \renewcommand{\familydefault}{\sfdefault} % set default font sans serif
 
 % title page
-\title{\MyTitle}
+\title{%
+	\MyTitle{} – \RecpJobTitle
+	\IfNonEmpty{\RecpJobRef}{\\{\small \RecpJobRef}}
+}
 \subtitle{Anhang}
 \author{\MyNameShort \\ \MyStreet \\ \MyCity}
 \date{\PrettyDate}
@@ -47,12 +50,12 @@
 % enalbe custom header and footer
 \pagestyle{scrheadings}
 \clearscrheadfoot
-\ihead{\MyTitle}
-\ohead{\MyNameFirst{} \MyNameLast}
+\ihead{\MyTitle{} – \RecpJobTitle\IfNonEmpty{\RecpJobRef}{, \RecpJobRef{}}}
+\ohead{\watermark{} \MyNameFirst{} \MyNameLast}
 \ifoot{\PrettyDate}
 \ofoot{\pagemark}
 \KOMAoptions{headsepline=1pt}
-\addtokomafont{headsepline}{\color{ProcessBlue}}
+\addtokomafont{headsepline}{\color{MyBlueDark}}
 
 \setlength{\parskip}{1ex}
 \setlength{\parindent}{0cm}
@@ -83,7 +86,7 @@
 \hyphenpenalty=10000
 \hbadness=10000
 
-\subsection{Praktische Erfahrung}
+\subsection{Tätigkeiten}
 \begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
 	\CVpractical
 \end{tabularx}
@@ -95,13 +98,13 @@
 
 \subsection{Sprachkenntnisse}
 \begin{minipage}[t]{0.5\textwidth}
-	\textbf{Programmiersprachen}\\\medskip
+	\textbf{Programmiersprachen\medskip}\\
 	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
 		\CVProgLangs
 	\end{tabularx}
 \end{minipage}
 \begin{minipage}[t]{0.5\textwidth}
-	\textbf{Sprachen}\\\medskip
+	\textbf{Sprachen\medskip}\\
 	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
 		\CVNatLangs
 	\end{tabularx}
@@ -109,18 +112,33 @@
 
 \subsection{Kenntnisse und Stärken}
 \begin{minipage}[t]{0.5\textwidth}
-	\textbf{Kenntnisse}	
+	\textbf{Kenntnisse}
+	\begin{flushleft}
 	\begin{itemize}\itemsep0em
 		\CVKnowledge
 	\end{itemize}
+	\end{flushleft}
 \end{minipage}
+\BlueVLine{ }
 \begin{minipage}[t]{0.5\textwidth}
 	\textbf{Stärken}
-	\begin{itemize}\itemsep0em 
+	\begin{flushleft}
+	\begin{itemize}\itemsep0em
 		\CVStrength
 	\end{itemize}
+	\end{flushleft}
 \end{minipage}
-\subsection{Hobbies und Interessen}
+
+\filbreak
+\subsection{Projekte}
+\begin{flushleft}
+	\setlength{\extrarowheight}{.5em}
+	\begin{tabularx}{\textwidth}{l!{\color{RoyalBlue}\vrule}X}
+		\CVProjects
+	\end{tabularx}
+\end{flushleft}
+
+\subsection{Hobbys und Interessen}
 	\CVHobbiesInterests
 \newpage
 
@@ -157,25 +175,30 @@
 \CVDocs
 
 \section{Richtigkeitserklärung}
-Hiermit bestätige ich die Vollständigkeit und Richtigkeit meiner oben
-gemachten Angaben und erkläre mich damit Einverstanden, dass diese
-gemäß meiner Datenschutzerklärung genutzt werden.
+Hiermit bestätige ich die Vollständigkeit und Richtigkeit meiner oben gemachten
+Angaben. Alle Dokumente liegen im Original vor, alle gelisteten Online-Präsenzen
+sind meine oder stehen mit mir in Zusammenhang und alle geäußerten Aussagen
+und Ansichten sind meine eigenen.
+
+Dieses Dokument wurde automatisiert erstellt und ist auch ohne oder nur mit
+stilisierter Unterschrift gültig.
 
 \section{Datenschutzerklärung}
-Hiermit erkläre ich mich damit einverstanden, dass meine Daten in diesem
-Dokument von der \RecpCompany{} zum Zwecke des Bewerbungs- und/oder
+Hiermit erkläre ich mich damit einverstanden, dass meine personenbezogenen Daten
+in diesem Dokument von der \RecpCompany{} zum Zwecke des Bewerbungs- und/oder
 Beurteilungsverfahrens im Einklang mit dem Bundesdatenschutzgesetz und der
-europäischen Datenschutzgrundverordnung betriebsintern erhoben, genutzt und
-übermittelt werden.
+europäischen Datenschutzgrundverordnung betriebsintern erhoben, genutzt,
+gespeichert und ggf. übermittelt werden.
+Einer Weitergabe an Dritte oder Prozessunbeteiligte widerspreche ich explizit.
 
 Nach Abschluss des Bewerbungs- und/oder Beurteilungsverfahrens werden alle
 persönlichen gespeicherten Daten unwiederbringlich gelöscht.
-Daten an Dritte werden nicht weitergegeben, es sei denn, ich habe dem
-explizit zugestimmt.
+Meine personenbezogenen Daten werden nur mit meiner gesonderten Einwilligung
+an Dritte übermittelt. Zur Rückverfolgung dieses Zweckes ist dieses Dokument
+mit einen Wasserzeichen versehen.
 
-Diese Einwilligung ist freiwillig und kann jederzeit
-mit Wirkung für die Zukunft gegenüber der \RecpCompany{} widerrufen werden.
-
+Diese Einwilligung ist freiwillig und kann unabhängig vom Bewerbungsverfahren
+jederzeit von mir gegenüber der \RecpCompany{} in jeder Form widerrufen werden.
 \vfill
 \MySignature
 \vfill\vfill\vfill
