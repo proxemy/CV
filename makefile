@@ -5,8 +5,8 @@ BUILD_DIR	?=./build
 TMP_DIR		=$(BUILD_DIR)/tmp
 
 TARGET_NAME		?=$(notdir $(basename $(RECP)))
-TARGET_FILE		=$(BUILD_DIR)/$(TARGET_NAME).pdf
-TARGET_LETTER	=$(BUILD_DIR)/$(TARGET_NAME)_letter.pdf
+TARGET_FILE		=$(TMP_DIR)/$(TARGET_NAME).pdf
+TARGET_LETTER	=$(TMP_DIR)/$(TARGET_NAME)_letter.pdf
 
 PDFLATEX_ARGS ?= \
 		-synctex=1 \
@@ -38,7 +38,7 @@ $(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 	# TOC file for the the second run.
 	@echo -e "\n\n--- Building TOC index. ---\n\n"
 	pdflatex \
-		-output-directory=$(BUILD_DIR) \
+		-output-directory=$(TMP_DIR) \
 		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_TEX_ARGS) \
@@ -47,18 +47,20 @@ $(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 
 	@echo -e "\n\n--- Creating CV PDF. ---\n\n"
 	pdflatex \
-		-output-directory=$(BUILD_DIR) \
+		-output-directory=$(TMP_DIR) \
 		-jobname=$(jobname) \
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_TEX_ARGS) \
 		"\\def\\InputLetter{$(TARGET_LETTER)} \
 		\\input{$(TEMPLATE_CV)}"
 
+	mv $(TARGET_FILE) $(BUILD_DIR)
+
 
 $(TARGET_LETTER): check_env_args $(BUILD_TMP)
 	@echo -e "\n\n--- Creating letter PDF. ---\n\n"
 	pdflatex \
-		-output-directory=$(BUILD_DIR) \
+		-output-directory=$(TMP_DIR) \
 		-jobname=$(notdir $(basename $(TARGET_LETTER))) \
 		$(PDFLATEX_ARGS) \
 		$(PDFLATEX_TEX_ARGS) \
