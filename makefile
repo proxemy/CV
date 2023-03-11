@@ -2,6 +2,7 @@
 
 # Global parameters for PDF creation
 BUILD_DIR	?=./build
+TMP_DIR		=$(BUILD_DIR)/tmp
 
 TARGET_NAME		?=$(notdir $(basename $(RECP)))
 TARGET_FILE		=$(BUILD_DIR)/$(TARGET_NAME).pdf
@@ -76,4 +77,4 @@ clean:
 
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR) $(TMP_DIR)
