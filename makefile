@@ -35,7 +35,7 @@ $(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 	# pdflatex parses its input once and is thus not able to create a TOC
 	# index ahead. Therefore we need to execute it twice to create a complete
 	# TOC file for the the second run.
-	@echo "\n--- Building TOC index."
+	@echo -e "\n\n--- Building TOC index. ---\n\n"
 	pdflatex \
 		-output-directory=$(BUILD_DIR) \
 		-jobname=$(jobname) \
@@ -44,7 +44,7 @@ $(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 		"\\def\\InputLetter{$(TARGET_LETTER)} \
 		\\input{$(TEMPLATE_CV)}"
 
-	@echo "\n--- Creating CV PDF."
+	@echo -e "\n\n--- Creating CV PDF. ---\n\n"
 	pdflatex \
 		-output-directory=$(BUILD_DIR) \
 		-jobname=$(jobname) \
@@ -55,7 +55,7 @@ $(TARGET_FILE): check_env_args $(BUILD_DIR) $(TARGET_LETTER)
 
 
 $(TARGET_LETTER): check_env_args $(BUILD_TMP)
-	@echo "\n--- Creating letter PDF."
+	@echo -e "\n\n--- Creating letter PDF. ---\n\n"
 	pdflatex \
 		-output-directory=$(BUILD_DIR) \
 		-jobname=$(notdir $(basename $(TARGET_LETTER))) \
