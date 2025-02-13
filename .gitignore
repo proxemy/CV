@@ -1,5 +1,5 @@
 # only track example data
-data_*/*
+data*/*
 !data_example/*
 
 # pdflatex intermediate output
