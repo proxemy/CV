@@ -50,8 +50,13 @@
 % enalbe custom header and footer
 \pagestyle{scrheadings}
 \clearscrheadfoot
-\ihead{\MyTitle{} – \RecpJobTitle\IfNonEmpty{\RecpJobRef}{, \RecpJobRef{}}}
-\ohead{\watermark{} \MyNameFirst{} \MyNameLast}
+\ihead{
+	\small
+	\MyTitle{} – \RecpJobTitle\IfNonEmpty{\RecpJobRef}{, \RecpJobRef{}}
+	\newline
+	\RecpCompany
+}
+\ohead{\small\watermark{} \MyNameFirst{} \MyNameLast}
 \ifoot{\PrettyDate}
 \ofoot{\pagemark}
 \KOMAoptions{headsepline=1pt}
