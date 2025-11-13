@@ -1,5 +1,6 @@
-# only track example data
-data*/*
+# local folders
+data
+build/
 !data_example/*
 
 # pdflatex intermediate output
@@ -9,3 +10,4 @@ data*/*
 *.aux
 *.pdf
 *.gz
+
