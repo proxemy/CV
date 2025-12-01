@@ -18,10 +18,12 @@
 \newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline} % for tabularx sections
 \newcommand{\BlueVLine}{\color{RoyalBlue}{\vline}{}\color{Black}} % general vertical line
 \newcommand{\CvItem}[5]{ % adds CV rows of work places into a table
+	\raggedleft
 	% from#1 – until#2 | company-name#3 
-	#1 – #2 & \IfNonEmpty{#4#5}{\textbf{#3}}{#3} % optional bold
-	\IfNonEmpty{#4}{\quad#4} % optional position/details#4
-	\IfNonEmpty{#5}{\newline#5} % optional job/task-descriptions#5
+	#1 – #2 &
+	\ifthenelse{\equal{#4#5}{}}{#3}{\textbf{#3}} % optional bold company (CV item) name
+	\IfNonEmpty{#4}{– #4} % optional job title#4
+	\IfNonEmpty{#5}{\begin{addmargin}[1em]{1em}#5\end{addmargin}} % optional job/task-descriptions#5
 	\\}
 %\newcommand{\EduItem}[3]{#1 – #2 & #3 \\} % adds CV rows of work places into a table
 \def\MyNameShort{\MyNameFirst{} \MyNameLast}
