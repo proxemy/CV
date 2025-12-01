@@ -80,3 +80,8 @@ clean:
 
 $(BUILD_DIR):
 	mkdir -p $(BUILD_DIR) $(TMP_DIR)
+
+example:
+	CV=data_example/my_data.tex \
+	RECP=data_example/recp_file.tex \
+	make

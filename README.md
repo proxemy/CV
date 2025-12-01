@@ -10,12 +10,17 @@ recipient information.
 You can use [`nix-shell`](https://nixos.org/manual/nix/stable/command-ref/nix-shell.html)
 to load all dependencies.
 
-To customize the PDF to your needs, you have to provide these two files:
+To customize the PDF to your needs, you have to provide these files:
 * `my_data.tex` -- contains your personal and CV information
 * `recipient_file.tex` -- contains contact information of the recipient
 
 You can use the `data_example/*` files to create a test PDF
 and as guidance to create your on input files.
+The easiest way to build an example PDF is:
+```bash
+nix-shell
+make example
+```
 
 To pass these files to `make`/`pdflatex` you have to define the paths to them
 as environment variables `CV` and `RECP`.  
@@ -23,8 +28,8 @@ Then you can start the PDF creation. The code below will generate a test PDF and
 put it into the locally created `build` folder.
 
 ```bash
-export CV=data_example/my_data.tex RECP=data_example/recp_file.tex
-make clean && make
+export CV=my_data.tex RECP=recp_file.tex
+make
 ```
 
 ## Customization
