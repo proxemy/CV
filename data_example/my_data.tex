@@ -25,12 +25,17 @@
 % \I{start date}{end date}{description}
 
 \def\CVpractical{%
-	\I{03.2011}{05.2015}{My Position, the Company, the Workplace}
-	\I{06.2015}{01.2018}{Work2}
+	\CvItem{03.2011}{05.2015}{Company1}{My Position}{
+		My responsibilities here.\newline
+		As multi-line string.
+	}
+	\CvItem{01.2010}{02.2011}{Private sabbatical, non-work}{}{} % all CvItem args need to be provided
+	\CvItem{06.2005}{09.2009}{Company2 LLC}{Entry Position}{Previous tasks and challenges.}
 }
 
-\def\CVeducation{
-	\I{from}{until}{School/Training/Education}
+\def\CVeducation{%
+	\CvItem{from}{until}{School/Training/Education}{}{}
+	\CvItem{from}{until}{School/Training/Education}{}{}
 }
 
 \def\CVAboutMe{%
@@ -96,5 +101,4 @@ Fleißtext über meine Hobbies und Interessen.
 \PageFillImage{cert_example.png} % page 1
 % page 2 ...
 }
-
 
