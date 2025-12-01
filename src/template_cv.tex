@@ -82,8 +82,11 @@
 	\MyDataExt{0.5\linewidth}
 	&
 	\noindent\center
-	\includegraphics[height=\PersonalDataHeight,keepaspectratio]
-	{\CVDataPath/profile_pic.jpg}
+	\setlength{\fboxrule}{1.5pt}
+	\fcolorbox{MyBlueMedium}{white}{
+		\includegraphics[height=\PersonalDataHeight,keepaspectratio]
+		{\CVDataPath/profile_pic.jpg}
+	}
 \end{tabularx}
 }
 
