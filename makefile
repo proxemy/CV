@@ -11,6 +11,7 @@ TARGET_LETTER	=$(TMP_DIR)/$(TARGET_NAME)_letter.pdf
 PDFLATEX_ARGS ?= \
 		-synctex=1 \
 		-file-line-error \
+		-halt-on-error \
 		-interaction=errorstopmode
 
 TEMPLATE_LETTER	?=src/template_letter.tex
