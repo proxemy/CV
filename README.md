@@ -62,6 +62,3 @@ To create a letter before a CV with a table of content, these two parts get crea
 separately and merged together afterwards. You can inspect these intermediates
 in the `builds/tmp` folder, unless you didn't run a `make clean`.
 
-## License
-
-MIT.
