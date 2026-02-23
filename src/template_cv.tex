@@ -51,14 +51,14 @@
 \pagestyle{scrheadings}
 \clearscrheadfoot
 \ihead{
-	\small
-	\MyTitle{} – \RecpJobTitle\IfNonEmpty{\RecpJobRef}{, \RecpJobRef{}}
+	\footnotesize
+	\MyTitle{} – \RecpJobTitle
 	\newline
 	\RecpCompany
 }
-\ohead{\small\watermark{} \MyNameFirst{} \MyNameLast}
-\ifoot{\PrettyDate}
-\ofoot{\pagemark}
+\ohead{\footnotesize\watermark{} \MyNameFirst{} \MyNameLast}
+\ifoot{\footnotesize\IfNonEmpty{\RecpJobRef}{Ref.:\RecpJobRef{}\newline}\PrettyDate}
+\ofoot{\footnotesize\pagemark}
 \KOMAoptions{headsepline=1pt}
 \addtokomafont{headsepline}{\color{MyBlueDark}}
 
