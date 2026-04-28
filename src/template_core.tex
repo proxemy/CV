@@ -15,6 +15,7 @@
 \newcommand{\HrefEmail}[1]{\href{mailto:#1}{#1}}
 \newcommand{\PrettyDate}{\number\day{}.\number\month{}.\number\year}
 \newcommand{\IfNonEmpty}[2]{\ifthenelse{\equal{#1}{}}{}{#2}}
+\newcommand{\IfNonEmptyElse}[2]{\ifthenelse{\equal{#1}{}}{#2}{#1}}
 \newcommand{\BlueHLine}{\arrayrulecolor{RoyalBlue}\hline} % for tabularx sections
 \newcommand{\BlueVLine}{\color{RoyalBlue}{\vline}{}\color{Black}} % general vertical line
 \newcommand{\CvItem}[5]{ % adds CV rows of work places into a table
@@ -56,7 +57,8 @@
 \IfSubStr{\RecpTitle}{Herr}{ \RecpIsMaletrue }{ \RecpIsMalefalse }
 \def\RecpSalutation{%
 	\IfNonEmpty{\RecpCompany}{%
-		Sehr geehrte Damen und Herren \RecpCompanySalutForm{} \RecpCompany,
+		Sehr geehrte Damen und Herren \RecpCompanySalutForm{}
+			\IfNonEmptyElse{\RecpCompanySpecialSalut}{\RecpCompany},
 		\IfNonEmpty{\RecpName}{\newline}
 	}
 		\IfNonEmpty{\RecpName}{%
